@@ -6,7 +6,7 @@ export default StyleSheet.create(
         {
             backgroundColor: '#F7F7F7',
             flex: 1,
-          
+
         },
 
         inputRoundedHorizontal:
@@ -33,6 +33,20 @@ export default StyleSheet.create(
             borderWidth: 1,
             borderRadius: 50,
             padding: 4,
+        },
+        textBoldSmall:
+        {
+            fontWeight: 'bold',
+            fontSize: 16
+        },
+        textBoldNormal:
+        {
+            fontWeight: 'bold',
+            fontSize: 18
+        }, textBoldBig:
+        {
+            fontWeight: 'bold',
+            fontSize: 20
         }
     }
 );

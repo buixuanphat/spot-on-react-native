@@ -1,7 +1,6 @@
 import { Image, KeyboardAvoidingView, Platform, Text, View } from "react-native";
 import InputRoundedHorizontal from "../components/InputRoundedHorizontal";
 import ButtonRoundedHorizontal from "../components/ButtonRoundedHorizontal";
-import Styles from "../components/Styles";
 import { useState } from "react";
 import DatePicker from "../components/DatePicker";
 import { format } from 'date-fns';
@@ -9,7 +8,8 @@ import MySnackBar from "../components/MySnackBar";
 import * as Yup from 'yup'
 import { Formik } from "formik";
 import Apis, { endpoints } from "../utils/Apis";
-import MyColor from "../utils/Color";
+import MyColor from "../MyColor";
+import MyStyles from "../MyStyles";
 
 
 const Register = ({ navigation }) => {
@@ -93,7 +93,7 @@ const Register = ({ navigation }) => {
 
     return (
         <>
-            <KeyboardAvoidingView style={[Styles.container,]} behavior="padding">
+            <KeyboardAvoidingView style={[MyStyles.container,]} behavior="padding">
                 <View style={{ flex: 1, justifyContent: 'center' }} >
                     <Formik
                         initialValues={{

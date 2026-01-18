@@ -1,16 +1,17 @@
 import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import Styles from "../components/Styles";
+import MyStyles from "../MyStyles.js"
 import Logo from '../assets/spoton_logo.png'
 import InputRoundedHorizontal from "../components/InputRoundedHorizontal";
 import ButtonRoundedHorizontal from "../components/ButtonRoundedHorizontal";
 import ButtonRoundedHorizontalOutline from "../components/ButtonRoundedHorizontalOutline";
-import { useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import MySnackBar from "../components/MySnackBar";
-import MyColor from "../utils/Color";
 import Apis, { authApis, endpoints } from "../utils/Apis";
 import * as Yup from 'yup'
 import { Formik } from "formik";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MyUserContext } from "../MyContext";
+
 
 const Login = ({ navigation }) => {
 
@@ -21,41 +22,33 @@ const Login = ({ navigation }) => {
     const [showSnack, setShowSnack] = useState(false);
     const [snackColor, setSnackColor] = useState();
 
+    const [, dispatch] = useContext(MyUserContext)
+
 
     const login = async (value) => {
         try {
             setLoading(true);
-            let res = await Apis.post(endpoints['login'], value);
 
-
-
+            const res = await Apis.post(endpoints.login, value);
             const token = res.data.data.token;
-            await AsyncStorage.setItem('token', token);
 
-            let user = (await authApis()).get(endpoints['currentUser']);
-            await AsyncStorage.setItem('user', JSON.stringify((await user).data.data));
+            const userRes = await authApis(token).get(endpoints.currentUser);
+            const user = userRes.data.data;
 
-            navigation.navigate('Main');
+            await AsyncStorage.setItem("token", token);
+            await AsyncStorage.setItem("user", JSON.stringify(user));
 
-            setMessage("Đăng nhập thành công");
-            setSnackColor(MyColor['success']);
-            setShowSnack(true);
-            setTimeout(() => {
-                setShowSnack(false);
-            }, 2000);
-        }
-        catch (e) {
-            setMessage(e?.response?.data?.message || e.message);
-            setSnackColor(MyColor['redError']);
-            setShowSnack(true);
-            setTimeout(() => {
-                setShowSnack(false);
-            }, 2000);
-        }
-        finally {
+            dispatch({
+                type: "login",
+                payload: { token, user },
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
             setLoading(false);
         }
-    }
+    };
+
 
     const loginSchema = Yup.object(
         {
@@ -68,7 +61,7 @@ const Login = ({ navigation }) => {
 
     return (
         <>
-            <KeyboardAvoidingView style={[Styles.container,]} behavior={"padding"} >
+            <KeyboardAvoidingView style={[MyStyles.container,]} behavior={"padding"} >
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}  >
                     <Image source={Logo} style={{ width: 300, height: 300 }} />
                 </View>

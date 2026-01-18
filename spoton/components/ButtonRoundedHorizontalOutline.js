@@ -1,12 +1,12 @@
 import { Button } from "react-native-paper";
-import MyColor from "../utils/Color";
-import Styles from "./Styles";
+import MyColor from "../MyColor.js";
 import { TouchableOpacity } from "react-native";
+import MyStyles from "../MyStyles";
 
-const ButtonRoundedHorizontalOutline = ({ title, style, icon, onPress }) => {
+const ButtonRoundedHorizontalOutline = ({ title, style, icon, onPress, textColor }) => {
     return (
         <TouchableOpacity >
-            <Button icon={icon} uppercase='true' style={[Styles.buttonRoundedHorizontalOutline, style]} textColor={MyColor.primary} labelStyle={{ fontSize: 18 }} onPress={onPress} >{title}</Button>
+            <Button icon={icon} uppercase='true' style={style} textColor={textColor || MyColor.primary} labelStyle={{ fontSize: 18 }} onPress={onPress} >{title}</Button>
         </TouchableOpacity>
     );
 }

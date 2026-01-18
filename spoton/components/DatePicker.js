@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import Styles from './Styles';
 import { format, setDate } from 'date-fns';
 import { HelperText, Icon } from 'react-native-paper';
+import MyStyles from '../MyStyles';
 
 export default function DatePicker({ style, onChange, error }) {
 
@@ -15,7 +15,7 @@ export default function DatePicker({ style, onChange, error }) {
         <View style={style}>
             <TouchableOpacity
                 onPress={() => setShow(true)}
-                style={[Styles.inputRoundedHorizontal, { padding: 16, flexDirection: 'row' }]}
+                style={[MyStyles.inputRoundedHorizontal, { padding: 16, flexDirection: 'row' }]}
             >
                 <Icon source="calendar-range" size={24} />
                 <Text style={{ fontSize: 18, marginLeft: 16 }}>{date}</Text>
