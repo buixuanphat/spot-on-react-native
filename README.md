@@ -1,7 +1,7 @@
 # Hệ Thống Bán Sự Kiện Trực Tuyến
 
 ### Demo dự án
-**Video demo:** [Link Google Drive](https://drive.google.com/drive/u/1/folders/1wBaMJr3s0kHq82rgwOq6bj55oyetEYHO)
+**Video demo:** [Link Google Drive](https://drive.google.com/file/d/1GhnnHk3JeayL5fMuO46veThPqQTOk-Tz/view?usp=drive_link)
 
 ### Công nghệ sử dụng
 
